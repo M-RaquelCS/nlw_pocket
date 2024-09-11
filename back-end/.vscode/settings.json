@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "cSpell.words": [
+    "Acordar",
+    "biomejs",
+    "cedo",
+    "exercitar",
+    "fastify",
+    "inorbit",
+    "Meditar",
+    "paralleldrive"
+  ]
+}

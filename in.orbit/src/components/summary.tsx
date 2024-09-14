@@ -13,6 +13,12 @@ import ptBr from 'dayjs/locale/pt-BR'
 
 dayjs.locale(ptBr)
 
+type goal = {
+  id: string
+  title: string
+  completedAt: string
+}
+
 export function Summary() {
   const { data } = useQuery({
     queryKey: ['summary'],
@@ -27,7 +33,8 @@ export function Summary() {
   const lastDayOnWeek = dayjs().endOf('week').format('D MMM')
 
   const completedPercentage = Math.round((data.completed * 100) / data.total)
-  console.log(data.goalsPerDay)
+  // console.log(data.goalsPerDay)
+  console.log(Object.entries(data.goalsPerDay))
 
   return (
     <div className="py-10 max-w-[480px] px-5 mx-auto flex flex-col gap-6">
@@ -88,7 +95,10 @@ export function Summary() {
         {Object.entries(data.goalsPerDay).map(([date, goals]) => {
           const weekDay = dayjs(date).format('dddd')
           const formattedDate = dayjs(date).format('D [de] MMMM')
-          console.log(goals)
+          // Verifica se goals é um array, para garantir que você pode iterar sobre ele
+          const goalsArray = Array.isArray(goals) ? goals : [goals]
+          // console.log(date)
+          console.log(goalsArray)
           return (
             <div key={date} className="flex flex-col gap-4">
               <h3 className="font-medium">
@@ -97,14 +107,19 @@ export function Summary() {
               </h3>
 
               <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="size-4 text-pink-500" />
-                  <span className="text-sm text-zinc-400">
-                    Você completou "
-                    <span className="to-zinc-100">Acordar cedo</span>" ás{' '}
-                    <span className="to-zinc-100">08:13h</span>
-                  </span>
-                </li>
+                {goalsArray.map((g: goal) => {
+                  const time = dayjs(g.completedAt).format('HH:mm')
+                  return (
+                    <li key={g.id} className="flex items-center gap-2">
+                      <CheckCircle2 className="size-4 text-pink-500" />
+                      <span className="text-sm text-zinc-400">
+                        Você completou "
+                        <span className="to-zinc-100">{g.title}</span>" às{' '}
+                        <span className="to-zinc-100">{time}h</span>
+                      </span>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           )

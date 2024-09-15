@@ -5,11 +5,11 @@ import { DialogTrigger } from './ui/dialog'
 import iconInOrbit from '../assets/icon-in-orbit.svg'
 import { Progress, ProgressIndicator } from './ui/progress-bar'
 import { Separator } from './ui/separator'
-import { OutlineButton } from './ui/outline-button'
 import { useQuery } from '@tanstack/react-query'
 import { getSummary } from '../http/get-summary'
 import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-BR'
+import { PendingGoals } from './pendingGoals'
 
 dayjs.locale(ptBr)
 
@@ -23,6 +23,7 @@ export function Summary() {
   const { data } = useQuery({
     queryKey: ['summary'],
     queryFn: getSummary,
+    staleTime: 1000 * 60,
   })
 
   if (!data) {
@@ -68,26 +69,10 @@ export function Summary() {
           <span>{completedPercentage}%</span>
         </div>
       </div>
+
       <Separator />
 
-      <div className="flex flex-wrap gap-3 overflow-ellipsis">
-        <OutlineButton>
-          <Plus className="size-4 text-zinc-600" />
-          Meditar
-        </OutlineButton>
-        <OutlineButton>
-          <Plus className="size-4 text-zinc-600" />
-          Praticar exercício
-        </OutlineButton>
-        <OutlineButton>
-          <Plus className="size-4 text-zinc-600" />
-          Nadar
-        </OutlineButton>
-        <OutlineButton>
-          <Plus className="size-4 text-zinc-600" />
-          Me alimentar
-        </OutlineButton>
-      </div>
+      <PendingGoals />
 
       <div className="flex flex-col gap-6">
         <h2 className="text-xl font-medium">Sua semana</h2>

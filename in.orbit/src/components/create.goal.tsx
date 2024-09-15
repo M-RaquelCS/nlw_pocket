@@ -1,18 +1,18 @@
 import { X } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from './ui/button'
 import {
   DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from '../ui/dialog'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
+} from './ui/dialog'
+import { Input } from './ui/input'
+import { Label } from './ui/label'
 import {
   RadioGroup,
   RadioGroupIndicator,
   RadioGroupItem,
-} from '../ui/radio-group'
+} from './ui/radio-group'
 
 export function CreateGoal() {
   return (

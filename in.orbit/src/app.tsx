@@ -1,6 +1,6 @@
 import { Dialog } from './components/ui/dialog'
 
-import { CreateGoal } from './components/Dialog/create.goal'
+import { CreateGoal } from './components/create.goal'
 import { Summary } from './components/summary'
 
 // import { EmptyGoals } from './components/Dialog/empty-goals'
